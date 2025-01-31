@@ -135,9 +135,9 @@ class WP_Telegram {
 		if ( $chat_id === false ) {
 			$chat_id = get_user_meta( get_current_user_id(), "tg_wp_factor_chat_id" );
 		}
-
-
-		return $this->send( sprintf( esc_html__( "This is your access code: %s", "two-factor-login-telegram" ), $token ), $chat_id );
+        // Add <code> to cover token and Specify 'HTML' as the parse mode
+        $message = sprintf(__( "This is your access code: <code>%s</code>", "two-factor-login-telegram" ), $token);
+        return $this->send( $message, $chat_id, 'HTML' );
 	}
 
 	/**
